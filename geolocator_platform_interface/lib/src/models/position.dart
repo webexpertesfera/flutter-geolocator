@@ -2,6 +2,9 @@ import 'package:meta/meta.dart';
 
 /// Contains detailed location information.
 @immutable
+
+/// Contains detailed location information.
+@immutable
 class Position {
   /// Constructs an instance with the given values for testing. [Position]
   /// instances constructed this way won't actually reflect any real information
@@ -14,6 +17,7 @@ class Position {
     required this.altitude,
     required this.heading,
     required this.speed,
+    required this.provider,
     required this.speedAccuracy,
     this.floor,
     this.isMocked = false,
@@ -27,6 +31,8 @@ class Position {
   /// (exclusive) to +180 (inclusive).
   final double longitude;
 
+
+  final String provider;
   /// The time at which this position was determined.
   final DateTime? timestamp;
 
@@ -86,7 +92,10 @@ class Position {
         other.speed == speed &&
         other.speedAccuracy == speedAccuracy &&
         other.timestamp == timestamp &&
-        other.isMocked == isMocked;
+        other.isMocked == isMocked  &&
+        other.provider== provider
+      ;
+
 
     return areEqual;
   }
@@ -95,6 +104,7 @@ class Position {
   int get hashCode =>
       accuracy.hashCode ^
       altitude.hashCode ^
+      provider.hashCode ^
       heading.hashCode ^
       latitude.hashCode ^
       longitude.hashCode ^
@@ -106,7 +116,7 @@ class Position {
 
   @override
   String toString() {
-    return 'Latitude: $latitude, Longitude: $longitude';
+    return 'Latitude: $latitude, Longitude: $longitude, Altitude: $altitude, Altitude: $altitude,Provider:  $provider, Mocked: $isMocked';
   }
 
   /// Converts the supplied [Map] to an instance of the [Position] class.
@@ -131,6 +141,7 @@ class Position {
     return Position(
       latitude: positionMap['latitude'],
       longitude: positionMap['longitude'],
+      provider:  positionMap['provider']??"",
       timestamp: timestamp,
       altitude: positionMap['altitude'] ?? 0.0,
       accuracy: positionMap['accuracy'] ?? 0.0,
@@ -146,6 +157,7 @@ class Position {
   /// serialized to JSON.
   Map<String, dynamic> toJson() => {
         'longitude': longitude,
+        'provider': provider,
         'latitude': latitude,
         'timestamp': timestamp?.millisecondsSinceEpoch,
         'accuracy': accuracy,

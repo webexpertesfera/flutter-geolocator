@@ -342,7 +342,7 @@ class _GeolocatorWidgetState extends State<GeolocatorWidget> {
   }
 
   void _getLastKnownPosition() async {
-    final position = await geolocatorAndroid.getLastKnownPosition();
+    final position = await geolocatorAndroid.getLastKnownPosition(forceLocationManager: true);
     if (position != null) {
       _updatePositionList(
         _PositionItemType.position,

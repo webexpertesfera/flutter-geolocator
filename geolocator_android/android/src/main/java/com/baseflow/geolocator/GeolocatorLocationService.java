@@ -72,12 +72,10 @@ public class GeolocatorLocationService extends Service {
   @Override
   public void onDestroy() {
     Log.d(TAG, "Destroying location service.");
-
     stopLocationService();
     disableBackgroundMode();
     geolocationManager = null;
     backgroundNotification = null;
-
     Log.d(TAG, "Destroyed location service.");
     super.onDestroy();
   }

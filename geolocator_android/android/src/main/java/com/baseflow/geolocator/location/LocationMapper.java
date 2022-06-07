@@ -18,7 +18,7 @@ public class LocationMapper {
     position.put("latitude", location.getLatitude());
     position.put("longitude", location.getLongitude());
     position.put("timestamp", location.getTime());
-
+    position.put("provider", location.getProvider());
     if (location.hasAltitude()) position.put("altitude", location.getAltitude());
     if (location.hasAccuracy()) position.put("accuracy", (double) location.getAccuracy());
     if (location.hasBearing()) position.put("heading", (double) location.getBearing());
