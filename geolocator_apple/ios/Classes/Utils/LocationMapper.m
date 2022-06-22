@@ -31,20 +31,8 @@
     [locationMap setObject:@(location.speed) forKey: @"speed"];
     [locationMap setObject:@(speedAccuracy) forKey: @"speed_accuracy"];
     [locationMap setObject:@(location.course) forKey: @"heading"];
-   
-    if (@available(iOS 10.0, *)) {
-        if (@(location.speedAccuracy) != nil) {
-            [locationMap setObject:@("Network") forKey: @"provider"];
-        } else {
-            [locationMap setObject:@("GPS") forKey: @"provider"];
-        }
-    } else {
-        if (@(location.speed) != nil) {
-            [locationMap setObject:@("Network") forKey: @"provider"];
-        } else {
-            [locationMap setObject:@("GPS") forKey: @"provider"];
-        }
-    }
+    [locationMap setObject:@("Unknown") forKey: @"provider"];
+    
     if (@available(macOS 10.15, *)) {
       if(location.floor && location.floor.level) {
         [locationMap setObject:@(location.floor.level) forKey:@"floor"];
